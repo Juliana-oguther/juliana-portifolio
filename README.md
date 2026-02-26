@@ -16,6 +16,26 @@
 
 ---
 
+## Demonstração visual
+
+<p align="center">
+  <img src="docs/profile.jpeg" alt="Preview do portfólio" width="820" />
+</p>
+
+<p align="center">
+  <em>Prévia da interface editorial do portfólio.</em>
+</p>
+
+### GIF de navegação
+
+<p align="center">
+  <img src="docs/preview.gif" alt="Demonstração em GIF do portfólio" width="820" />
+</p>
+
+> Se o arquivo `docs/preview.gif` ainda não existir no repositório, grave uma navegação curta da página inicial e salve com esse nome para aparecer automaticamente no README.
+
+---
+
 ## Visão técnica do projeto
 
 Este projeto é uma aplicação **Next.js 14 (App Router)** para apresentar um portfólio profissional com estética editorial, animações suaves e navegação orientada por seções.
