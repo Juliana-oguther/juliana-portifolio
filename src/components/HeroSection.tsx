@@ -1,7 +1,6 @@
 'use client';
 
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
-import Image from 'next/image';
 import { useRef } from 'react';
 import { ScrollReveal } from './ScrollReveal';
 import { CVDownloadDropdown } from './CVDownloadDropdown';
@@ -58,13 +57,12 @@ export function HeroSection({ profile, resumeFiles, language }: HeroSectionProps
               className="profile-photo-ring animate-gentle-pulse"
             >
               <div className="relative h-44 w-44 overflow-hidden rounded-full md:h-52 md:w-52">
-                <Image
-                  src="/profile.jpeg"
+                <img
+                  src="profile.jpeg"
                   alt={language === 'en' ? `Photo of ${profile.fullName}` : `Foto de ${profile.fullName}`}
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 768px) 176px, 208px"
+                  className="h-full w-full object-cover"
+                  loading="eager"
+                  fetchPriority="high"
                 />
               </div>
             </motion.div>
