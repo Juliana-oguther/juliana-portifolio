@@ -82,6 +82,7 @@ export const profile: ProfessionalProfile = {
     email: 'juliana.oguther@gmail.com',
     phone: '+55 (21) 99669-5856',
     linkedinUrl: 'https://www.linkedin.com/',
+    githubUrl: 'https://github.com/Juliana-oguther',
   },
 };
 
