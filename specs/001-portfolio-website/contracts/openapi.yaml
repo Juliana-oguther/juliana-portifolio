@@ -1,0 +1,266 @@
+openapi: 3.0.3
+info:
+  title: Juliana Portfolio Content API
+  version: 1.0.0
+  description: |
+    Contract-first API definition for portfolio content and key user actions.
+    This contract is designed for future API-backed evolution; current v1 may use local/static data.
+servers:
+  - url: https://example.com
+    description: Placeholder production server
+
+tags:
+  - name: Profile
+  - name: Skills
+  - name: Sections
+  - name: Resume
+  - name: Preferences
+
+paths:
+  /api/profile:
+    get:
+      tags: [Profile]
+      summary: Get professional profile data
+      operationId: getProfile
+      responses:
+        '200':
+          description: Profile payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessionalProfile'
+
+  /api/skills:
+    get:
+      tags: [Skills]
+      summary: Get categorized skills
+      operationId: getSkills
+      responses:
+        '200':
+          description: Skill category payload
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [categories, skills]
+                properties:
+                  categories:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SkillCategory'
+                  skills:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Skill'
+
+  /api/sections:
+    get:
+      tags: [Sections]
+      summary: Get visible portfolio sections and anchors
+      operationId: getSections
+      responses:
+        '200':
+          description: Section payload
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PortfolioSection'
+
+  /api/resume:
+    get:
+      tags: [Resume]
+      summary: Get resume metadata and availability
+      operationId: getResumeMetadata
+      responses:
+        '200':
+          description: Resume metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResumeAsset'
+
+  /api/resume/download:
+    get:
+      tags: [Resume]
+      summary: Download CV file
+      operationId: downloadResume
+      responses:
+        '200':
+          description: CV file stream
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: CV asset unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserMessageError'
+
+  /api/preferences/theme:
+    post:
+      tags: [Preferences]
+      summary: Persist selected UI theme mode
+      operationId: setThemePreference
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThemePreferenceRequest'
+      responses:
+        '200':
+          description: Updated preference
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemePreference'
+        '400':
+          description: Invalid theme value
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserMessageError'
+
+components:
+  schemas:
+    ProfessionalProfile:
+      type: object
+      required:
+        - fullName
+        - headline
+        - location
+        - summary
+        - strengths
+        - contact
+      properties:
+        fullName:
+          type: string
+          minLength: 2
+          maxLength: 120
+        headline:
+          type: string
+          minLength: 5
+          maxLength: 140
+        location:
+          type: string
+          minLength: 2
+          maxLength: 120
+        summary:
+          type: string
+          minLength: 40
+          maxLength: 320
+        strengths:
+          type: array
+          minItems: 3
+          items:
+            type: string
+        contact:
+          $ref: '#/components/schemas/ContactInfo'
+
+    ContactInfo:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        linkedinUrl:
+          type: string
+          format: uri
+        githubUrl:
+          type: string
+          format: uri
+
+    SkillCategory:
+      type: object
+      required: [id, name, displayOrder]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        displayOrder:
+          type: integer
+          minimum: 1
+
+    Skill:
+      type: object
+      required: [id, name, categoryId, level, displayOrder]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        categoryId:
+          type: string
+        level:
+          type: string
+          enum: [Básico, Intermediário, Avançado]
+        displayOrder:
+          type: integer
+          minimum: 1
+
+    PortfolioSection:
+      type: object
+      required: [id, title, anchor, displayOrder, isVisible]
+      properties:
+        id:
+          type: string
+          enum: [home, about, skills, contact]
+        title:
+          type: string
+        anchor:
+          type: string
+        displayOrder:
+          type: integer
+          minimum: 1
+        isVisible:
+          type: boolean
+
+    ResumeAsset:
+      type: object
+      required: [filePath, label, isAvailable]
+      properties:
+        filePath:
+          type: string
+          example: /cv.pdf
+        label:
+          type: string
+        isAvailable:
+          type: boolean
+        lastUpdated:
+          type: string
+          format: date
+
+    ThemePreferenceRequest:
+      type: object
+      required: [mode]
+      properties:
+        mode:
+          type: string
+          enum: [light, dark]
+
+    ThemePreference:
+      type: object
+      required: [mode]
+      properties:
+        mode:
+          type: string
+          enum: [light, dark]
+        updatedAt:
+          type: string
+          format: date-time
+
+    UserMessageError:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: string
+          description: Human-readable and non-technical error message

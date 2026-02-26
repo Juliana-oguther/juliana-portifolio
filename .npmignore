@@ -1,0 +1,11 @@
+.github/
+.specify/
+.vscode/
+specs/
+docs/
+node_modules/
+.next/
+out/
+coverage/
+*.log
+.env*
