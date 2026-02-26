@@ -1,8 +1,4 @@
 /** @type {import('next').NextConfig} */
-const repository = process.env.GITHUB_REPOSITORY?.replace(/^[^/]+\//, '') ?? '';
-const isUserOrOrgSite = repository.endsWith('.github.io');
-const basePath = repository && !isUserOrOrgSite ? `/${repository}` : '';
-
 const nextConfig = {
   reactStrictMode: true,
   output: 'export',
@@ -10,11 +6,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath,
-  assetPrefix: basePath || undefined,
-  env: {
-    NEXT_PUBLIC_BASE_PATH: basePath,
-  },
+  basePath: '/juliana-portifolio',
+  assetPrefix: '/juliana-portifolio/',
 };
 
 export default nextConfig;

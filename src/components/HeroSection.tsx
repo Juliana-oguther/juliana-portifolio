@@ -16,8 +16,6 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ profile, resumeFiles, language }: HeroSectionProps) {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
-  const profileImageSrc = `${basePath}/profile.jpeg`;
   const photoRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -61,7 +59,7 @@ export function HeroSection({ profile, resumeFiles, language }: HeroSectionProps
             >
               <div className="relative h-44 w-44 overflow-hidden rounded-full md:h-52 md:w-52">
                 <Image
-                  src={profileImageSrc}
+                  src="/profile.jpeg"
                   alt={language === 'en' ? `Photo of ${profile.fullName}` : `Foto de ${profile.fullName}`}
                   fill
                   className="object-cover"
