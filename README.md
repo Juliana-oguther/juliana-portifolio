@@ -18,14 +18,6 @@
 
 ## Demonstração visual
 
-<p align="center">
-  <img src="docs/profile.jpeg" alt="Preview do portfólio" width="820" />
-</p>
-
-<p align="center">
-  <em>Prévia da interface editorial do portfólio.</em>
-</p>
-
 ### GIF de navegação
 
 <p align="center">
