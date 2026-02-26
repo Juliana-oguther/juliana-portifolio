@@ -131,6 +131,33 @@ npm run lint
 
 ---
 
+## Deploy no GitHub Pages
+
+Este projeto já está configurado para publicar automaticamente no GitHub Pages com GitHub Actions.
+
+### 1) Enviar para o GitHub
+
+- Faça push para a branch `main`.
+
+### 2) Ativar Pages no repositório
+
+No GitHub, acesse:
+
+- `Settings` → `Pages`
+- Em `Build and deployment`, selecione `Source: GitHub Actions`
+
+### 3) Acompanhar publicação
+
+- Vá em `Actions` e aguarde o workflow `Deploy to GitHub Pages` finalizar.
+- A URL final será exibida no job de deploy (ex.: `https://<usuario>.github.io/<repositorio>/`).
+
+### Observações
+
+- Se o repositório for do tipo `<usuario>.github.io`, o site publica na raiz (`https://<usuario>.github.io/`).
+- Se for um repositório comum, publica em subpasta (`/<repositorio>/`) automaticamente.
+
+---
+
 ## Scripts disponíveis
 
 - `npm run clean` → remove cache `.next`

@@ -118,7 +118,7 @@ export const skills: Skill[] = [
 ];
 
 export const resume: ResumeAsset = {
-  filePath: '/cv.pdf',
+  filePath: 'cv.pdf',
   label: 'Baixar CV',
   isAvailable: true,
   lastUpdated: '2026-02-15',
@@ -128,7 +128,7 @@ export const resumeFiles: ResumeFile[] = [
   {
     language: 'pt',
     flag: '🇧🇷',
-    filePath: '/Julianacurriculo.pdf',
+    filePath: 'Julianacurriculo.pdf',
     label: 'Português',
     filename: 'Julianacurriculo.pdf',
     isAvailable: true,
@@ -137,7 +137,7 @@ export const resumeFiles: ResumeFile[] = [
   {
     language: 'en',
     flag: '🇬🇧',
-    filePath: '/JulianaITSupport.pdf',
+    filePath: 'JulianaITSupport.pdf',
     label: 'English',
     filename: 'JulianaITSupport.pdf',
     isAvailable: true,
